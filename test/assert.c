@@ -21,10 +21,10 @@ void it(char *message, Callback callback)
 {
   if (callback())
   {
-    printf("✔ %s", message);
+    printf("✔ %s\n", message);
   }
   else
   {
-    printf("✗ %s", message);
+    printf("✗ %s\n", message);
   }
 }
