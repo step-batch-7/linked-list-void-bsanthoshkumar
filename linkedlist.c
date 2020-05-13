@@ -78,6 +78,25 @@ Status insert_at(List_ptr list, Element element, int position)
 
   return Success;
 }
+
+Element remove_from_start(List_ptr list)
+{
+  if (list->first == NULL)
+  {
+    return Failure;
+  }
+
+  Node_ptr node = list->first;
+  list->first = list->first->next;
+  if (list->length == 1)
+  {
+    list->last = list->first;
+  }
+  list->length--;
+
+  return node->element;
+}
+
 void display_number(Element element)
 {
   printf("%d ", *(int *)element);
