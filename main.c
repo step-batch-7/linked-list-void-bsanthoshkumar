@@ -1,4 +1,5 @@
 #include "linkedlist.h"
+#include <stdio.h>
 
 int main()
 {
@@ -12,6 +13,9 @@ int main()
   *b = 20;
   add_to_start(list, b);
 
+  forEach(list, &display_number);
+  reverse(list);
+  printf("\n");
   forEach(list, &display_number);
 
   return 0;

@@ -225,6 +225,26 @@ Status clear_list(List_ptr list)
   return Success;
 }
 
+List_ptr reverse(List_ptr list)
+{
+  Prev_Current_Pair_ptr pair = malloc(sizeof(Prev_Current_Pair));
+  pair->current = list->first;
+  pair->prev = NULL;
+  while (pair->current != NULL)
+  {
+    Node_ptr temp_node = pair->current;
+    pair->current = pair->current->next;
+    temp_node->next = pair->prev;
+    pair->prev = temp_node;
+  }
+
+  pair->current = list->first;
+  list->first = list->last;
+  list->last = pair->current;
+
+  return list;
+}
+
 void display_number(Element element)
 {
   printf("%d ", *(int *)element);
