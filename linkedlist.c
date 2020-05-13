@@ -79,6 +79,21 @@ Status insert_at(List_ptr list, Element element, int position)
   return Success;
 }
 
+Status add_unique(List_ptr list, Element element, Matcher matcher)
+{
+  Node_ptr current = list->first;
+  while (current != NULL)
+  {
+    if (matcher(current->element, element))
+    {
+      return Failure;
+    }
+    current = current->next;
+  }
+
+  return add_to_end(list, element);
+}
+
 Element remove_from_start(List_ptr list)
 {
   if (list->first == NULL)
