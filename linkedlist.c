@@ -188,6 +188,20 @@ Element remove_first_occurrence(List_ptr list, Element element, Matcher matcher)
   return NULL;
 }
 
+List_ptr remove_all_occurrences(List_ptr list, Element element, Matcher matcher)
+{
+  List_ptr removed_elements_list = create_list();
+  Element removed_element;
+
+  while (removed_element != NULL)
+  {
+    removed_element = remove_first_occurrence(list, element, matcher);
+    add_to_list(removed_elements_list, removed_element);
+  }
+
+  return removed_elements_list;
+}
+
 void display_number(Element element)
 {
   printf("%d ", *(int *)element);
