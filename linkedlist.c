@@ -171,6 +171,23 @@ Element remove_at(List_ptr list, int position)
   return pair->current->element;
 }
 
+Element remove_first_occurrence(List_ptr list, Element element, Matcher matcher)
+{
+  int position = 0;
+  Node_ptr current = list->first;
+  while (current != NULL)
+  {
+    if (matcher(current->element, element))
+    {
+      return remove_at(list, position);
+    }
+    current = current->next;
+    position++;
+  }
+
+  return NULL;
+}
+
 void display_number(Element element)
 {
   printf("%d ", *(int *)element);
