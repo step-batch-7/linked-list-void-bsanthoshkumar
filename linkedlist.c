@@ -138,6 +138,39 @@ Element remove_from_end(List_ptr list)
   return current->element;
 }
 
+Element remove_at(List_ptr list, int position)
+{
+  if (position < 0 || position >= list->length)
+  {
+    return Failure;
+  }
+
+  if (position == 0)
+  {
+    return remove_from_start(list);
+  }
+
+  int temp = 1;
+  Prev_Current_Pair_ptr pair = malloc(sizeof(Prev_Current_Pair));
+  pair->current = list->first;
+
+  while (temp <= position)
+  {
+    pair->prev = pair->current;
+    pair->current = pair->current->next;
+    temp++;
+  }
+
+  pair->prev->next = pair->current->next;
+  if (pair->prev->next == NULL)
+  {
+    list->last = pair->prev;
+  }
+  list->length--;
+
+  return pair->current->element;
+}
+
 void display_number(Element element)
 {
   printf("%d ", *(int *)element);
