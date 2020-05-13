@@ -11,14 +11,11 @@ The Linked List maintains the element references in a sequence and provides conv
 
 typedef unsigned int Index;
 
-#ifndef __STATUS_DEFINE_
-#define __STATUS_DEFINE_
 typedef enum
 {
   Failure,
   Success
 } Status;
-#endif
 
 typedef void *Element;
 
