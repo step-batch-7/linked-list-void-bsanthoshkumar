@@ -98,7 +98,7 @@ Element remove_from_start(List_ptr list)
 {
   if (list->first == NULL)
   {
-    return Failure;
+    return NULL;
   }
 
   Node_ptr node = list->first;
@@ -116,7 +116,7 @@ Element remove_from_end(List_ptr list)
 {
   if (list->last == NULL)
   {
-    return Failure;
+    return NULL;
   }
 
   if (list->length == 1)
@@ -142,7 +142,7 @@ Element remove_at(List_ptr list, int position)
 {
   if (position < 0 || position >= list->length)
   {
-    return Failure;
+    return NULL;
   }
 
   if (position == 0)
