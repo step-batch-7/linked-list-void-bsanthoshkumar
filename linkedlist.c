@@ -202,6 +202,29 @@ List_ptr remove_all_occurrences(List_ptr list, Element element, Matcher matcher)
   return removed_elements_list;
 }
 
+Status clear_list(List_ptr list)
+{
+  if (list->first == NULL)
+  {
+    return Failure;
+  }
+
+  Prev_Current_Pair_ptr pair = malloc(sizeof(Prev_Current_Pair));
+  pair->current = list->first;
+  while (pair->current != NULL)
+  {
+    pair->prev = pair->current;
+    pair->current = pair->current->next;
+    free(pair->prev);
+  }
+
+  list->first = NULL;
+  list->last = NULL;
+  list->length = 0;
+
+  return Success;
+}
+
 void display_number(Element element)
 {
   printf("%d ", *(int *)element);
