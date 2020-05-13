@@ -39,6 +39,14 @@ typedef struct linklist
 
 typedef LinkedList *List_ptr;
 
+typedef struct
+{
+  Node_ptr prev;
+  Node_ptr current;
+} Prev_Current_Pair;
+
+typedef Prev_Current_Pair *Prev_Current_Pair_ptr;
+
 typedef Element (*Mapper)(Element);
 typedef Status (*Predicate)(Element);
 typedef Element (*Reducer)(Element, Element);

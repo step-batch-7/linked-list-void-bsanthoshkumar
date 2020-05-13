@@ -49,6 +49,35 @@ Status add_to_start(List_ptr list, Element element)
   return Success;
 }
 
+Status insert_at(List_ptr list, Element element, int position)
+{
+  if (position < 0 || position > list->length)
+  {
+    return Failure;
+  }
+  if (position == 0)
+  {
+    return add_to_start(list, element);
+  }
+
+  int temp = 1;
+  Prev_Current_Pair_ptr pair = malloc(sizeof(Prev_Current_Pair));
+  pair->current = list->first;
+
+  while (temp <= position)
+  {
+    pair->prev = pair->current;
+    pair->current = pair->current->next;
+    temp++;
+  }
+
+  Node_ptr newnode = create_newnode(element);
+  pair->prev->next = newnode;
+  newnode->next = pair->current;
+  list->length++;
+
+  return Success;
+}
 void display_number(Element element)
 {
   printf("%d ", *(int *)element);
