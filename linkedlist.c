@@ -199,6 +199,11 @@ List_ptr remove_all_occurrences(List_ptr list, Element element, Matcher matcher)
     add_to_list(removed_elements_list, removed_element);
   }
 
+  if (removed_elements_list->length == 0)
+  {
+    return NULL;
+  }
+
   return removed_elements_list;
 }
 

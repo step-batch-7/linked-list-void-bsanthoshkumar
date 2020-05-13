@@ -13,6 +13,10 @@ int main()
   *b = 20;
   add_to_start(list, b);
 
+  int *c = malloc(sizeof(int));
+  *c = 30;
+  add_to_start(list, c);
+
   forEach(list, &display_number);
   reverse(list);
   printf("\n");
