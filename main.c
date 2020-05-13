@@ -6,6 +6,7 @@ int main()
   int *a = malloc(sizeof(int));
   *a = 10;
   add_to_list(list, a);
+  forEach(list, &display_number);
 
   return 0;
 }

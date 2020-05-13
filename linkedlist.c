@@ -34,3 +34,18 @@ Status add_to_list(List_ptr list, Element element)
 
   return Success;
 }
+
+void display_number(Element element)
+{
+  printf("%d ", *(int *)element);
+}
+
+void forEach(List_ptr list, ElementProcessor processor)
+{
+  Node_ptr current = list->first;
+  while (current != NULL)
+  {
+    processor(current->element);
+    current = current->next;
+  }
+}

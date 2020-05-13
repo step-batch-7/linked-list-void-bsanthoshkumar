@@ -9,7 +9,7 @@ The Linked List maintains the element references in a sequence and provides conv
 #ifndef __LINKEDLIST_H_
 #define __LINKEDLIST_H_
 
-
+typedef unsigned int Index;
 typedef enum
 {
   Failure,
@@ -64,4 +64,6 @@ List_ptr remove_all_occurrences(List_ptr, Element element, Matcher matcher); // 
 Status add_unique(List_ptr list, Element element, Matcher matcher);
 
 Status clear_list(List_ptr);
+
+void display_number(Element element);
 #endif
