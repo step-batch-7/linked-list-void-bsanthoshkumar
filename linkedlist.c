@@ -35,6 +35,20 @@ Status add_to_list(List_ptr list, Element element)
   return Success;
 }
 
+Status add_to_start(List_ptr list, Element element)
+{
+  Node_ptr newnode = create_newnode(element);
+  newnode->next = list->first;
+  list->first = newnode;
+  if (list->last == NULL)
+  {
+    list->last = newnode;
+  }
+  list->length++;
+
+  return Success;
+}
+
 void display_number(Element element)
 {
   printf("%d ", *(int *)element);
