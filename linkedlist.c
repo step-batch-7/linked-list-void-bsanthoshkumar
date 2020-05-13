@@ -112,6 +112,32 @@ Element remove_from_start(List_ptr list)
   return node->element;
 }
 
+Element remove_from_end(List_ptr list)
+{
+  if (list->last == NULL)
+  {
+    return Failure;
+  }
+
+  if (list->length == 1)
+  {
+    return remove_from_start(list);
+  }
+
+  Node_ptr current = list->first;
+  while (current->next != list->last)
+  {
+    current = current->next;
+  }
+
+  list->last = current;
+  list->last->next = NULL;
+  list->length--;
+
+  current = current->next;
+  return current->element;
+}
+
 void display_number(Element element)
 {
   printf("%d ", *(int *)element);
