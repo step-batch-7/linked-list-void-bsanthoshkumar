@@ -17,9 +17,11 @@ int main()
   *c = 30;
   add_to_start(list, c);
 
+  printf("Elements in a list: ");
   forEach(list, &display_number);
   reverse(list);
   printf("\n");
+  printf("Elements in a list: ");
   forEach(list, &display_number);
 
   return 0;
