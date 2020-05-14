@@ -18,6 +18,22 @@ Node_ptr create_newnode(Element element)
   return newnode;
 }
 
+Prev_Current_Pair_ptr move_to(List_ptr list, int position)
+{
+  int temp = 1;
+  Prev_Current_Pair_ptr pair = malloc(sizeof(Prev_Current_Pair));
+  pair->current = list->first;
+
+  while (temp <= position)
+  {
+    pair->prev = pair->current;
+    pair->current = pair->current->next;
+    temp++;
+  }
+
+  return pair;
+}
+
 Status add_to_list(List_ptr list, Element element)
 {
   Node_ptr newnode = create_newnode(element);
@@ -68,29 +84,20 @@ Status insert_at(List_ptr list, Element element, int position)
     return add_to_start(list, element);
   }
 
-  int temp = 1;
-  Prev_Current_Pair_ptr pair = malloc(sizeof(Prev_Current_Pair));
-  pair->current = list->first;
-
-  while (temp <= position)
-  {
-    pair->prev = pair->current;
-    pair->current = pair->current->next;
-    temp++;
-  }
-
+  Prev_Current_Pair_ptr pair = move_to(list, position);
   Node_ptr newnode = create_newnode(element);
   if (newnode == NULL)
   {
     return Failure;
   }
+
   pair->prev->next = newnode;
   newnode->next = pair->current;
-  list->length++;
   if (newnode->next == NULL)
   {
     list->last = newnode;
   }
+  list->length++;
 
   return Success;
 }
@@ -166,17 +173,7 @@ Element remove_at(List_ptr list, int position)
     return remove_from_start(list);
   }
 
-  int temp = 1;
-  Prev_Current_Pair_ptr pair = malloc(sizeof(Prev_Current_Pair));
-  pair->current = list->first;
-
-  while (temp <= position)
-  {
-    pair->prev = pair->current;
-    pair->current = pair->current->next;
-    temp++;
-  }
-
+  Prev_Current_Pair_ptr pair = move_to(list, position);
   pair->prev->next = pair->current->next;
   if (pair->prev->next == NULL)
   {
