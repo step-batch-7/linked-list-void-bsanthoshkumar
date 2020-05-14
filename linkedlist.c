@@ -21,6 +21,10 @@ Node_ptr create_newnode(Element element)
 Status add_to_list(List_ptr list, Element element)
 {
   Node_ptr newnode = create_newnode(element);
+  if (newnode == NULL)
+  {
+    return Failure;
+  }
   if (list->first == NULL)
   {
     list->first = newnode;
@@ -38,6 +42,10 @@ Status add_to_list(List_ptr list, Element element)
 Status add_to_start(List_ptr list, Element element)
 {
   Node_ptr newnode = create_newnode(element);
+  if (newnode == NULL)
+  {
+    return Failure;
+  }
   newnode->next = list->first;
   list->first = newnode;
   if (list->last == NULL)
@@ -72,6 +80,10 @@ Status insert_at(List_ptr list, Element element, int position)
   }
 
   Node_ptr newnode = create_newnode(element);
+  if (newnode == NULL)
+  {
+    return Failure;
+  }
   pair->prev->next = newnode;
   newnode->next = pair->current;
   list->length++;
