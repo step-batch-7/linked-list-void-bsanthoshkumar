@@ -112,6 +112,37 @@ Boolean test_reduce()
   return flag;
 }
 
+Status is_number_equal(Element a, Element b)
+{
+  return (*(int *)a) == (*(int *)b);
+}
+
+Boolean test_remove_all_occurrences()
+{
+  Boolean flag = True;
+  List_ptr list = create_list();
+  int *a = malloc(sizeof(int));
+  *a = 10;
+  add_to_list(list, a);
+  int *b = malloc(sizeof(int));
+  *b = 20;
+  add_to_list(list, b);
+  int *c = malloc(sizeof(int));
+  *c = 10;
+  add_to_list(list, c);
+  int *d = malloc(sizeof(int));
+  *d = 30;
+  add_to_list(list, d);
+  Element *element = malloc(sizeof(int));
+  *(int *)element = 10;
+  List_ptr removed_elements_list = remove_all_occurrences(list, element, &is_number_equal);
+  flag = flag && assert_numbers_equal(removed_elements_list->length, 2);
+  flag = flag && assert_numbers_equal(*(int *)(removed_elements_list->first->element), 10);
+  flag = flag && assert_numbers_equal(*(int *)(removed_elements_list->last->element), 10);
+
+  return flag;
+}
+
 void run_tests()
 {
   printf("running tests ....\n\n");
@@ -121,6 +152,7 @@ void run_tests()
   it("Should insert element at position", &test_insert_at);
   it("Should filter all even numbers in a list", &test_filter);
   it("Should sum all numbers in a list", &test_reduce);
+  it("Should remove all occurence of a number in a list", &test_remove_all_occurrences);
 }
 
 int main()

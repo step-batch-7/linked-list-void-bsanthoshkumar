@@ -204,12 +204,14 @@ List_ptr remove_all_occurrences(List_ptr list, Element element, Matcher matcher)
 {
   List_ptr removed_elements_list = create_list();
   Element removed_element;
-
-  while (removed_element != NULL)
+  do
   {
     removed_element = remove_first_occurrence(list, element, matcher);
-    removed_element &&add_to_list(removed_elements_list, removed_element);
-  }
+    if (removed_element != NULL)
+    {
+      add_to_list(removed_elements_list, removed_element);
+    }
+  } while (removed_element != NULL);
 
   return removed_elements_list;
 }
