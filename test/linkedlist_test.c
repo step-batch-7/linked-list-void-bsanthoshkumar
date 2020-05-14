@@ -82,6 +82,36 @@ Boolean test_filter()
   return flag;
 }
 
+Element sum(Element a, Element b)
+{
+  *(int *)a = *(int *)a + *(int *)b;
+  return a;
+}
+
+Boolean test_reduce()
+{
+  Boolean flag = True;
+  List_ptr list = create_list();
+  int *a = malloc(sizeof(int));
+  *a = 1;
+  add_to_list(list, a);
+  int *b = malloc(sizeof(int));
+  *b = 2;
+  add_to_list(list, b);
+  int *c = malloc(sizeof(int));
+  *c = 3;
+  add_to_list(list, c);
+  int *d = malloc(sizeof(int));
+  *d = 4;
+  add_to_list(list, d);
+  Element *reduced_element = malloc(sizeof(int));
+  *reduced_element = 0;
+  reduced_element = reduce(list, reduced_element, &sum);
+  flag = flag && assert_numbers_equal(*(int *)(reduced_element), 10);
+
+  return flag;
+}
+
 void run_tests()
 {
   printf("running tests ....\n\n");
@@ -90,6 +120,7 @@ void run_tests()
   it("Should insert element at start", &test_add_to_start);
   it("Should insert element at position", &test_insert_at);
   it("Should filter all even numbers in a list", &test_filter);
+  it("Should sum all numbers in a list", &test_reduce);
 }
 
 int main()
