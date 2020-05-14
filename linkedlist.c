@@ -208,7 +208,7 @@ List_ptr remove_all_occurrences(List_ptr list, Element element, Matcher matcher)
   while (removed_element != NULL)
   {
     removed_element = remove_first_occurrence(list, element, matcher);
-    add_to_list(removed_elements_list, removed_element);
+    removed_element &&add_to_list(removed_elements_list, removed_element);
   }
 
   return removed_elements_list;
