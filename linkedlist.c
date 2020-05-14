@@ -1,5 +1,4 @@
 #include "linkedlist.h"
-#include <stdlib.h>
 
 List_ptr create_list(void)
 {
@@ -266,6 +265,7 @@ List_ptr map(List_ptr list, Mapper mapper)
   {
     Element mapped_element = (*mapper)(current->element);
     add_to_list(mapped_array, mapped_element);
+    current = current->next;
   }
 
   return mapped_array;
@@ -281,6 +281,7 @@ List_ptr filter(List_ptr list, Predicate predicate)
     {
       add_to_list(filtered_list, current->element);
     }
+    current = current->next;
   }
 
   return filtered_list;

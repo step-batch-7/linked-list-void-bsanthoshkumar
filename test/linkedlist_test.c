@@ -53,6 +53,35 @@ Boolean test_insert_at()
   return flag;
 }
 
+Status is_even(Element element)
+{
+  return *(int *)element % 2 == 0;
+}
+
+Boolean test_filter()
+{
+  Boolean flag = True;
+  List_ptr list = create_list();
+  int *a = malloc(sizeof(int));
+  *a = 1;
+  add_to_list(list, a);
+  int *b = malloc(sizeof(int));
+  *b = 2;
+  add_to_list(list, b);
+  int *c = malloc(sizeof(int));
+  *c = 3;
+  add_to_list(list, c);
+  int *d = malloc(sizeof(int));
+  *d = 4;
+  add_to_list(list, d);
+  List_ptr filtered_list = filter(list, &is_even);
+  flag = flag && assert_numbers_equal(filtered_list->length, 2);
+  flag = flag && assert_numbers_equal(*(int *)(filtered_list->first->element), 2);
+  flag = flag && assert_numbers_equal(*(int *)(filtered_list->last->element), 4);
+
+  return flag;
+}
+
 void run_tests()
 {
   printf("running tests ....\n\n");
@@ -60,6 +89,7 @@ void run_tests()
   it("Should insert element at end", &test_add_to_list);
   it("Should insert element at start", &test_add_to_start);
   it("Should insert element at position", &test_insert_at);
+  it("Should filter all even numbers in a list", &test_filter);
 }
 
 int main()
