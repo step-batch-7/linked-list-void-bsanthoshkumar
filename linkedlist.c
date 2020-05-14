@@ -245,6 +245,19 @@ List_ptr reverse(List_ptr list)
   return list;
 }
 
+List_ptr map(List_ptr list, Mapper mapper)
+{
+  List_ptr mapped_array = create_list();
+  Node_ptr current = list->first;
+  while (current != NULL)
+  {
+    Element mapped_element = (*mapper)(current->element);
+    add_to_list(mapped_array, mapped_element);
+  }
+
+  return mapped_array;
+}
+
 List_ptr filter(List_ptr list, Predicate predicate)
 {
   List_ptr filtered_list = create_list();
