@@ -87,6 +87,10 @@ Status insert_at(List_ptr list, Element element, int position)
   pair->prev->next = newnode;
   newnode->next = pair->current;
   list->length++;
+  if (newnode->next == NULL)
+  {
+    list->last = newnode;
+  }
 
   return Success;
 }
