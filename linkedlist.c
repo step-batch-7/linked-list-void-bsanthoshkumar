@@ -245,19 +245,35 @@ List_ptr reverse(List_ptr list)
   return list;
 }
 
+List_ptr filter(List_ptr list, Predicate predicate)
+{
+  List_ptr filtered_list = create_list();
+  Node_ptr current = list->first;
+  while (current != NULL)
+  {
+    if ((*predicate)(current->element))
+    {
+      add_to_list(filtered_list, current->element);
+    }
+  }
+
+  return filtered_list;
+}
+
 Element reduce(List_ptr list, Element element, Reducer reducer)
 {
   Element reduced_value = element;
   Node_ptr current = list->first;
-  while(current != NULL)
+  while (current != NULL)
   {
     reduced_value = (*reducer)(reduced_value, current->element);
+    current = current->next;
   }
 
   return reduced_value;
 }
 
-    void display_number(Element element)
+void display_number(Element element)
 {
   printf("%d ", *(int *)element);
 }
