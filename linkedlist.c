@@ -154,10 +154,10 @@ Element remove_from_end(List_ptr list)
   }
 
   list->last = current;
+  current = current->next;
   list->last->next = NULL;
   list->length--;
 
-  current = current->next;
   return current->element;
 }
 
