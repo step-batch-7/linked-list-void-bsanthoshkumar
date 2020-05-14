@@ -199,11 +199,6 @@ List_ptr remove_all_occurrences(List_ptr list, Element element, Matcher matcher)
     add_to_list(removed_elements_list, removed_element);
   }
 
-  if (removed_elements_list->length == 0)
-  {
-    return NULL;
-  }
-
   return removed_elements_list;
 }
 
@@ -250,7 +245,19 @@ List_ptr reverse(List_ptr list)
   return list;
 }
 
-void display_number(Element element)
+Element reduce(List_ptr list, Element element, Reducer reducer)
+{
+  Element reduced_value = element;
+  Node_ptr current = list->first;
+  while(current != NULL)
+  {
+    reduced_value = (*reducer)(reduced_value, current->element);
+  }
+
+  return reduced_value;
+}
+
+    void display_number(Element element)
 {
   printf("%d ", *(int *)element);
 }
