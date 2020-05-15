@@ -3,17 +3,17 @@
 #include "assert.h"
 #include <stdio.h>
 
-Boolean should_add_at_end()
+Status should_add_at_end()
 {
-  Boolean flag = True;
+  Status status = Success;
   List_ptr list = create_list();
   int a = 10;
-  flag = flag && assert_status_equal(add_to_list(list, &a), Success);
-  flag = flag && assert_numbers_equal(list->length, 1);
-  flag = flag && assert_status_equal(*(int *)get_element(list, 0), a);
+  status = status && assert_status_equal(add_to_list(list, &a), Success);
+  status = status && assert_numbers_equal(list->length, 1);
+  status = status && assert_status_equal(*(int *)get_element(list, 0), a);
   free(list);
 
-  return flag;
+  return status;
 }
 
 void test_add_to_list()
@@ -22,17 +22,17 @@ void test_add_to_list()
   printf("\n");
 }
 
-Boolean should_add_at_start()
+Status should_add_at_start()
 {
-  Boolean flag = True;
+  Status status = Success;
   List_ptr list = create_list();
   int a = 10;
-  flag = flag && assert_status_equal(add_to_start(list, &a), Success);
-  flag = flag && assert_numbers_equal(list->length, 1);
-  flag = flag && assert_status_equal(*(int *)get_element(list, 0), a);
+  status = status && assert_status_equal(add_to_start(list, &a), Success);
+  status = status && assert_numbers_equal(list->length, 1);
+  status = status && assert_status_equal(*(int *)get_element(list, 0), a);
   free(list);
 
-  return flag;
+  return status;
 }
 
 void test_add_to_start()
@@ -41,71 +41,71 @@ void test_add_to_start()
   printf("\n");
 }
 
-Boolean should_insert_at_0th_position()
+Status should_insert_at_0th_position()
 {
-  Boolean flag = True;
+  Status status = Success;
   List_ptr list = create_list();
   int a = 10;
   add_to_list(list, &a);
   int b = 20;
   add_to_list(list, &b);
   int c = 30;
-  flag = flag && assert_status_equal(insert_at(list, &c, 0), Success);
-  flag = flag && assert_numbers_equal(list->length, 3);
-  flag = flag && assert_status_equal(*(int *)get_element(list, 0), c);
+  status = status && assert_status_equal(insert_at(list, &c, 0), Success);
+  status = status && assert_numbers_equal(list->length, 3);
+  status = status && assert_status_equal(*(int *)get_element(list, 0), c);
   free(list);
 
-  return flag;
+  return status;
 }
 
-Boolean should_insert_in_any_middle_position()
+Status should_insert_in_any_middle_position()
 {
-  Boolean flag = True;
+  Status status = Success;
   List_ptr list = create_list();
   int a = 10;
   add_to_list(list, &a);
   int b = 20;
   add_to_list(list, &b);
   int c = 30;
-  flag = flag && assert_status_equal(insert_at(list, &c, 1), Success);
-  flag = flag && assert_numbers_equal(list->length, 3);
-  flag = flag && assert_status_equal(*(int *)get_element(list, 1), c);
+  status = status && assert_status_equal(insert_at(list, &c, 1), Success);
+  status = status && assert_numbers_equal(list->length, 3);
+  status = status && assert_status_equal(*(int *)get_element(list, 1), c);
   free(list);
 
-  return flag;
+  return status;
 }
 
-Boolean should_insert_at_last_position()
+Status should_insert_at_last_position()
 {
-  Boolean flag = True;
+  Status status = Success;
   List_ptr list = create_list();
   int a = 10;
   add_to_list(list, &a);
   int b = 20;
   add_to_list(list, &b);
   int c = 30;
-  flag = flag && assert_status_equal(insert_at(list, &c, 2), Success);
-  flag = flag && assert_numbers_equal(list->length, 3);
-  flag = flag && assert_status_equal(*(int *)get_element(list, 2), c);
+  status = status && assert_status_equal(insert_at(list, &c, 2), Success);
+  status = status && assert_numbers_equal(list->length, 3);
+  status = status && assert_status_equal(*(int *)get_element(list, 2), c);
   free(list);
 
-  return flag;
+  return status;
 }
 
-Boolean should_not_insert_at_invalid_position()
+Status should_not_insert_at_invalid_position()
 {
-  Boolean flag = True;
+  Status status = Success;
   List_ptr list = create_list();
   int a = 10;
   add_to_list(list, &a);
   int b = 20;
   add_to_list(list, &b);
   int c = 30;
-  flag = flag && assert_status_equal(insert_at(list, &c, 5), Failure);
-  flag = flag && assert_numbers_equal(list->length, 2);
+  status = status && assert_status_equal(insert_at(list, &c, 5), Failure);
+  status = status && assert_numbers_equal(list->length, 2);
   free(list);
 
-  return flag;
+  return status;
 }
 
 void test_insert_at()
@@ -117,9 +117,9 @@ void test_insert_at()
   printf("\n");
 }
 
-Boolean filter_even_numbers()
+Status filter_even_numbers()
 {
-  Boolean flag = True;
+  Status status = Success;
   List_ptr list = create_list();
   int a = 1;
   add_to_list(list, &a);
@@ -130,11 +130,11 @@ Boolean filter_even_numbers()
   int d = 4;
   add_to_list(list, &d);
   List_ptr filtered_list = filter(list, &is_even);
-  flag = flag && assert_numbers_equal(filtered_list->length, 2);
-  flag = flag && assert_numbers_equal(*(int *)get_element(filtered_list, 0), 2);
-  flag = flag && assert_numbers_equal(*(int *)get_element(filtered_list, 1), 4);
+  status = status && assert_numbers_equal(filtered_list->length, 2);
+  status = status && assert_numbers_equal(*(int *)get_element(filtered_list, 0), 2);
+  status = status && assert_numbers_equal(*(int *)get_element(filtered_list, 1), 4);
 
-  return flag;
+  return status;
 }
 
 void test_filter()
@@ -143,9 +143,9 @@ void test_filter()
   printf("\n");
 }
 
-Boolean sum_of_all_numbers_in_list()
+Status sum_of_all_numbers_in_list()
 {
-  Boolean flag = True;
+  Status status = Success;
   List_ptr list = create_list();
   int a = 1;
   add_to_list(list, &a);
@@ -158,9 +158,9 @@ Boolean sum_of_all_numbers_in_list()
   Element *reduced_element = malloc(sizeof(int));
   *reduced_element = 0;
   reduced_element = reduce(list, reduced_element, &sum);
-  flag = flag && assert_numbers_equal(*(int *)(reduced_element), 10);
+  status = status && assert_numbers_equal(*(int *)(reduced_element), 10);
 
-  return flag;
+  return status;
 }
 
 void test_reduce()
@@ -169,9 +169,9 @@ void test_reduce()
   printf("\n");
 }
 
-Boolean remove_morethan_one_occurrence()
+Status remove_morethan_one_occurrence()
 {
-  Boolean flag = True;
+  Status status = Success;
   List_ptr list = create_list();
   int a = 10;
   add_to_list(list, &a);
@@ -184,11 +184,11 @@ Boolean remove_morethan_one_occurrence()
   Element *element = malloc(sizeof(int));
   *(int *)element = 10;
   List_ptr removed_elements_list = remove_all_occurrences(list, element, &is_number_equal);
-  flag = flag && assert_numbers_equal(removed_elements_list->length, 2);
-  flag = flag && assert_numbers_equal(*(int *)get_element(removed_elements_list, 0), 10);
-  flag = flag && assert_numbers_equal(*(int *)get_element(removed_elements_list, 1), 10);
+  status = status && assert_numbers_equal(removed_elements_list->length, 2);
+  status = status && assert_numbers_equal(*(int *)get_element(removed_elements_list, 0), 10);
+  status = status && assert_numbers_equal(*(int *)get_element(removed_elements_list, 1), 10);
 
-  return flag;
+  return status;
 }
 
 void test_remove_all_occurrences()

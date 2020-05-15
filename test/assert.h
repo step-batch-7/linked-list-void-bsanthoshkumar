@@ -10,7 +10,7 @@ typedef enum
 typedef int Integer;
 typedef char Character;
 
-typedef Boolean (*Callback)(void);
+typedef Status (*Callback)(void);
 typedef void (*Function)(void);
 
 void describe(char *functionname, Function function);
