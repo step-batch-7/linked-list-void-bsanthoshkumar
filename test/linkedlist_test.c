@@ -149,6 +149,46 @@ void test_insert_at()
   printf("\n");
 }
 
+Status should_add_unique_element_in_empty_list()
+{
+  Status status = Success;
+  List_ptr list = create_list();
+  int a = 10;
+  add_to_list(list, &a);
+  int b = 20;
+  add_to_list(list, &b);
+  int c = 30;
+  status = status && assert_status_equal(add_unique(list, &c, &is_number_equal), Success);
+  status = status && assert_numbers_equal(list->length, 3);
+  status = status && assert_status_equal(*(int *)get_element(list, 2), c);
+  free(list);
+
+  return status;
+}
+
+Status should_not_add_non_unique_element_in_empty_list()
+{
+  Status status = Success;
+  List_ptr list = create_list();
+  int a = 10;
+  add_to_list(list, &a);
+  int b = 20;
+  add_to_list(list, &b);
+  int c = 10;
+  status = status && assert_status_equal(add_unique(list, &c, &is_number_equal), Failure);
+  status = status && assert_numbers_equal(list->length, 2);
+  free(list);
+
+  return status;
+}
+
+void test_add_unique()
+{
+  it("Should insert element at end in list", &should_add_unique_element_in_empty_list);
+  it("Should not insert element in list", &should_not_add_non_unique_element_in_empty_list);
+  printf("\n");
+}
+
 Status filter_even_numbers_in_non_empty_list()
 {
   Status status = Success;
@@ -305,6 +345,7 @@ void run_tests()
   describe("add_to_list", &test_add_to_list);
   describe("add_to_start", &test_add_to_start);
   describe("insert_at", &test_insert_at);
+  describe("add_unique", &test_add_unique);
   describe("filter", &test_filter);
   describe("reduce", &test_reduce);
   describe("remove_all_occurrences", &test_remove_all_occurrences);
