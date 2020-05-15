@@ -10,7 +10,7 @@ Boolean should_add_at_end()
   int a = 10;
   flag = flag && assert_status_equal(add_to_list(list, &a), Success);
   flag = flag && assert_numbers_equal(list->length, 1);
-  flag = flag && assert_status_equal(*(int *)list->first->element, a);
+  flag = flag && assert_status_equal(*(int *)get_element(list, 0), a);
   free(list);
 
   return flag;
@@ -29,7 +29,7 @@ Boolean should_add_at_start()
   int a = 10;
   flag = flag && assert_status_equal(add_to_start(list, &a), Success);
   flag = flag && assert_numbers_equal(list->length, 1);
-  flag = flag && assert_status_equal(*(int *)list->first->element, a);
+  flag = flag && assert_status_equal(*(int *)get_element(list, 0), a);
   free(list);
 
   return flag;
@@ -52,7 +52,7 @@ Boolean should_insert_at_0th_position()
   int c = 30;
   flag = flag && assert_status_equal(insert_at(list, &c, 0), Success);
   flag = flag && assert_numbers_equal(list->length, 3);
-  flag = flag && assert_status_equal(*(int *)list->first->element, c);
+  flag = flag && assert_status_equal(*(int *)get_element(list, 0), c);
   free(list);
 
   return flag;
@@ -69,7 +69,7 @@ Boolean should_insert_in_any_middle_position()
   int c = 30;
   flag = flag && assert_status_equal(insert_at(list, &c, 1), Success);
   flag = flag && assert_numbers_equal(list->length, 3);
-  flag = flag && assert_status_equal(*(int *)list->first->next->element, c);
+  flag = flag && assert_status_equal(*(int *)get_element(list, 1), c);
   free(list);
 
   return flag;
@@ -86,7 +86,7 @@ Boolean should_insert_at_last_position()
   int c = 30;
   flag = flag && assert_status_equal(insert_at(list, &c, 2), Success);
   flag = flag && assert_numbers_equal(list->length, 3);
-  flag = flag && assert_status_equal(*(int *)list->last->element, c);
+  flag = flag && assert_status_equal(*(int *)get_element(list, 2), c);
   free(list);
 
   return flag;
@@ -131,8 +131,8 @@ Boolean filter_even_numbers()
   add_to_list(list, &d);
   List_ptr filtered_list = filter(list, &is_even);
   flag = flag && assert_numbers_equal(filtered_list->length, 2);
-  flag = flag && assert_numbers_equal(*(int *)(filtered_list->first->element), 2);
-  flag = flag && assert_numbers_equal(*(int *)(filtered_list->last->element), 4);
+  flag = flag && assert_numbers_equal(*(int *)get_element(filtered_list, 0), 2);
+  flag = flag && assert_numbers_equal(*(int *)get_element(filtered_list, 1), 4);
 
   return flag;
 }
@@ -185,8 +185,8 @@ Boolean remove_morethan_one_occurrence()
   *(int *)element = 10;
   List_ptr removed_elements_list = remove_all_occurrences(list, element, &is_number_equal);
   flag = flag && assert_numbers_equal(removed_elements_list->length, 2);
-  flag = flag && assert_numbers_equal(*(int *)(removed_elements_list->first->element), 10);
-  flag = flag && assert_numbers_equal(*(int *)(removed_elements_list->last->element), 10);
+  flag = flag && assert_numbers_equal(*(int *)get_element(removed_elements_list, 0), 10);
+  flag = flag && assert_numbers_equal(*(int *)get_element(removed_elements_list, 1), 10);
 
   return flag;
 }
