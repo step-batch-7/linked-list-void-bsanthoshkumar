@@ -169,6 +169,26 @@ Status filter_even_numbers_in_non_empty_list()
   return status;
 }
 
+Status doesnot_filter_even_numbers_in_non_empty_list()
+{
+  Status status = Success;
+  List_ptr list = create_list();
+  int a = 1;
+  add_to_list(list, &a);
+  int b = 3;
+  add_to_list(list, &b);
+  int c = 5;
+  add_to_list(list, &c);
+  int d = 7;
+  add_to_list(list, &d);
+  List_ptr filtered_list = filter(list, &is_even);
+  status = status && assert_numbers_equal(filtered_list->length, 0);
+  status = status && assert_is_null(filtered_list->first);
+  status = status && assert_is_null(filtered_list->last);
+
+  return status;
+}
+
 Status filter_even_numbers_in_empty_list()
 {
   Status status = Success;
@@ -181,10 +201,34 @@ Status filter_even_numbers_in_empty_list()
   return status;
 }
 
+Status filter_vowels_in_non_empty_list()
+{
+  Status status = Success;
+  List_ptr list = create_list();
+  char a = 'k';
+  add_to_list(list, &a);
+  char b = 'u';
+  add_to_list(list, &b);
+  char c = 'm';
+  add_to_list(list, &c);
+  char d = 'a';
+  add_to_list(list, &d);
+  char e = 'r';
+  add_to_list(list, &e);
+  List_ptr filtered_list = filter(list, &is_vowel);
+  status = status && assert_numbers_equal(filtered_list->length, 2);
+  status = status && assert_numbers_equal(*(char *)get_element(filtered_list, 0), b);
+  status = status && assert_numbers_equal(*(char *)get_element(filtered_list, 1), d);
+
+  return status;
+}
+
 void test_filter()
 {
   it("Should filter all even numbers in a list", &filter_even_numbers_in_non_empty_list);
+  it("Should give empty list if list has no even numbers", &doesnot_filter_even_numbers_in_non_empty_list);
   it("Should give empty list for filter for given empty list", &filter_even_numbers_in_empty_list);
+  it("Should filter all vowels in a list", &filter_vowels_in_non_empty_list);
   printf("\n");
 }
 
