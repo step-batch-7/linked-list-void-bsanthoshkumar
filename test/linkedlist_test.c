@@ -41,6 +41,23 @@ void test_add_to_start()
   printf("\n");
 }
 
+Boolean should_insert_at_0th_position()
+{
+  Boolean flag = True;
+  List_ptr list = create_list();
+  int a = 10;
+  add_to_list(list, &a);
+  int b = 20;
+  add_to_list(list, &b);
+  int c = 30;
+  flag = flag && assert_status_equal(insert_at(list, &c, 0), Success);
+  flag = flag && assert_numbers_equal(list->length, 3);
+  flag = flag && assert_status_equal(*(int *)list->first->element, c);
+  free(list);
+
+  return flag;
+}
+
 Boolean should_insert_in_any_middle_position()
 {
   Boolean flag = True;
@@ -58,9 +75,45 @@ Boolean should_insert_in_any_middle_position()
   return flag;
 }
 
+Boolean should_insert_at_last_position()
+{
+  Boolean flag = True;
+  List_ptr list = create_list();
+  int a = 10;
+  add_to_list(list, &a);
+  int b = 20;
+  add_to_list(list, &b);
+  int c = 30;
+  flag = flag && assert_status_equal(insert_at(list, &c, 2), Success);
+  flag = flag && assert_numbers_equal(list->length, 3);
+  flag = flag && assert_status_equal(*(int *)list->last->element, c);
+  free(list);
+
+  return flag;
+}
+
+Boolean should_not_insert_at_invalid_position()
+{
+  Boolean flag = True;
+  List_ptr list = create_list();
+  int a = 10;
+  add_to_list(list, &a);
+  int b = 20;
+  add_to_list(list, &b);
+  int c = 30;
+  flag = flag && assert_status_equal(insert_at(list, &c, 5), Failure);
+  flag = flag && assert_numbers_equal(list->length, 2);
+  free(list);
+
+  return flag;
+}
+
 void test_insert_at()
 {
-  it("Should insert element at position", &should_insert_in_any_middle_position);
+  it("Should insert element at 0th position", &should_insert_at_0th_position);
+  it("Should insert element at any middle position", &should_insert_in_any_middle_position);
+  it("Should insert element at last position", &should_insert_at_last_position);
+  it("Should not insert element at invalid position", &should_not_insert_at_invalid_position);
   printf("\n");
 }
 
