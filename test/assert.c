@@ -17,14 +17,20 @@ Boolean assert_characters_equal(Character actual, Character expected)
   return actual == expected;
 }
 
+void describe(char *functionname, Function function)
+{
+  printf("   %s\n", functionname);
+  function();
+}
+
 void it(char *message, Callback callback)
 {
   if (callback())
   {
-    printf("✔ %s\n", message);
+    printf("\t✔ %s\n", message);
   }
   else
   {
-    printf("✗ %s\n", message);
+    printf("\t✗ %s\n", message);
   }
 }

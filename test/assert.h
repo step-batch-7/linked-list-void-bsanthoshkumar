@@ -11,7 +11,9 @@ typedef int Integer;
 typedef char Character;
 
 typedef Boolean (*Callback)(void);
+typedef void (*Function)(void);
 
+void describe(char *functionname, Function function);
 void it(char *message, Callback callback);
 Boolean assert_status_equal(Status actual, Status expected);
 Boolean assert_numbers_equal(Integer actual, Integer expected);

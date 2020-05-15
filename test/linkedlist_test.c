@@ -2,7 +2,7 @@
 #include "assert.h"
 #include <stdio.h>
 
-Boolean test_add_to_list()
+Boolean should_add_at_end()
 {
   Boolean flag = True;
   List_ptr list = create_list();
@@ -17,7 +17,13 @@ Boolean test_add_to_list()
   return flag;
 }
 
-Boolean test_add_to_start()
+void test_add_to_list()
+{
+  it("Should insert element at end", &should_add_at_end);
+  printf("\n");
+}
+
+Boolean should_add_at_start()
 {
   Boolean flag = True;
   List_ptr list = create_list();
@@ -32,7 +38,13 @@ Boolean test_add_to_start()
   return flag;
 }
 
-Boolean test_insert_at()
+void test_add_to_start()
+{
+  it("Should insert element at start", &should_add_at_start);
+  printf("\n");
+}
+
+Boolean should_insert_in_any_middle_position()
 {
   Boolean flag = True;
   List_ptr list = create_list();
@@ -53,12 +65,18 @@ Boolean test_insert_at()
   return flag;
 }
 
+void test_insert_at()
+{
+  it("Should insert element at position", &should_insert_in_any_middle_position);
+  printf("\n");
+}
+
 Status is_even(Element element)
 {
   return *(int *)element % 2 == 0;
 }
 
-Boolean test_filter()
+Boolean filter_even_numbers()
 {
   Boolean flag = True;
   List_ptr list = create_list();
@@ -82,13 +100,19 @@ Boolean test_filter()
   return flag;
 }
 
+void test_filter()
+{
+  it("Should filter all even numbers in a list", &filter_even_numbers);
+  printf("\n");
+}
+
 Element sum(Element a, Element b)
 {
   *(int *)a = *(int *)a + *(int *)b;
   return a;
 }
 
-Boolean test_reduce()
+Boolean sum_of_all_numbers_in_list()
 {
   Boolean flag = True;
   List_ptr list = create_list();
@@ -112,12 +136,18 @@ Boolean test_reduce()
   return flag;
 }
 
+void test_reduce()
+{
+  it("Should give sum of all numbers in a list", &sum_of_all_numbers_in_list);
+  printf("\n");
+}
+
 Status is_number_equal(Element a, Element b)
 {
   return (*(int *)a) == (*(int *)b);
 }
 
-Boolean test_remove_all_occurrences()
+Boolean remove_morethan_one_occurrence()
 {
   Boolean flag = True;
   List_ptr list = create_list();
@@ -143,16 +173,21 @@ Boolean test_remove_all_occurrences()
   return flag;
 }
 
+void test_remove_all_occurrences()
+{
+  it("Should remove all occurence of a number in a list", &remove_morethan_one_occurrence);
+  printf("\n");
+}
 void run_tests()
 {
   printf("running tests ....\n\n");
 
-  it("Should insert element at end", &test_add_to_list);
-  it("Should insert element at start", &test_add_to_start);
-  it("Should insert element at position", &test_insert_at);
-  it("Should filter all even numbers in a list", &test_filter);
-  it("Should sum all numbers in a list", &test_reduce);
-  it("Should remove all occurence of a number in a list", &test_remove_all_occurrences);
+  describe("add_to_list", &test_add_to_list);
+  describe("add_to_start", &test_add_to_start);
+  describe("insert_a", &test_insert_at);
+  describe("filter", &test_filter);
+  describe("reduce", &test_reduce);
+  describe("remove_all_occurrences", &test_remove_all_occurrences);
 }
 
 int main()
