@@ -232,7 +232,7 @@ void test_filter()
   printf("\n");
 }
 
-Status sum_of_all_numbers_in_list()
+Status sum_of_all_numbers_in_non_empty_list()
 {
   Status status = Success;
   List_ptr list = create_list();
@@ -252,9 +252,22 @@ Status sum_of_all_numbers_in_list()
   return status;
 }
 
+Status sum_of_all_numbers_in_empty_list()
+{
+  Status status = Success;
+  List_ptr list = create_list();
+  Element *reduced_element = malloc(sizeof(int));
+  *reduced_element = 0;
+  reduced_element = reduce(list, reduced_element, &sum);
+  status = status && assert_numbers_equal(*(int *)(reduced_element), 0);
+
+  return status;
+}
+
 void test_reduce()
 {
-  it("Should give sum of all numbers in a list", &sum_of_all_numbers_in_list);
+  it("Should give sum of all numbers in a non empty list", &sum_of_all_numbers_in_non_empty_list);
+  it("Should give initial value for reduce in empty list", &sum_of_all_numbers_in_empty_list);
   printf("\n");
 }
 
