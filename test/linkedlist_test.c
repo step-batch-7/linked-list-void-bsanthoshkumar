@@ -1,4 +1,5 @@
 #include "../linkedlist.h"
+#include "utilities.h"
 #include "assert.h"
 #include <stdio.h>
 
@@ -63,11 +64,6 @@ void test_insert_at()
   printf("\n");
 }
 
-Status is_even(Element element)
-{
-  return *(int *)element % 2 == 0;
-}
-
 Boolean filter_even_numbers()
 {
   Boolean flag = True;
@@ -94,12 +90,6 @@ void test_filter()
   printf("\n");
 }
 
-Element sum(Element a, Element b)
-{
-  *(int *)a = *(int *)a + *(int *)b;
-  return a;
-}
-
 Boolean sum_of_all_numbers_in_list()
 {
   Boolean flag = True;
@@ -124,11 +114,6 @@ void test_reduce()
 {
   it("Should give sum of all numbers in a list", &sum_of_all_numbers_in_list);
   printf("\n");
-}
-
-Status is_number_equal(Element a, Element b)
-{
-  return (*(int *)a) == (*(int *)b);
 }
 
 Boolean remove_morethan_one_occurrence()
