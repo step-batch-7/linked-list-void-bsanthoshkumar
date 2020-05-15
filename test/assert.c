@@ -17,6 +17,11 @@ Boolean assert_characters_equal(Character actual, Character expected)
   return actual == expected;
 }
 
+Boolean assert_is_null(Element actual)
+{
+  return actual == NULL;
+}
+
 void describe(char *functionname, Function function)
 {
   printf("   %s\n", functionname);

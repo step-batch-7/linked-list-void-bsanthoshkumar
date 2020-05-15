@@ -149,7 +149,7 @@ void test_insert_at()
   printf("\n");
 }
 
-Status filter_even_numbers()
+Status filter_even_numbers_in_non_empty_list()
 {
   Status status = Success;
   List_ptr list = create_list();
@@ -169,9 +169,22 @@ Status filter_even_numbers()
   return status;
 }
 
+Status filter_even_numbers_in_empty_list()
+{
+  Status status = Success;
+  List_ptr list = create_list();
+  List_ptr filtered_list = filter(list, &is_even);
+  status = status && assert_numbers_equal(filtered_list->length, 0);
+  status = status && assert_is_null(filtered_list->first);
+  status = status && assert_is_null(filtered_list->last);
+
+  return status;
+}
+
 void test_filter()
 {
-  it("Should filter all even numbers in a list", &filter_even_numbers);
+  it("Should filter all even numbers in a list", &filter_even_numbers_in_non_empty_list);
+  it("Should give empty list for filter for given empty list", &filter_even_numbers_in_empty_list);
   printf("\n");
 }
 
