@@ -3,7 +3,7 @@
 #include "assert.h"
 #include <stdio.h>
 
-Status should_add_at_end()
+Status should_add_at_end_in_empty_list()
 {
   Status status = Success;
   List_ptr list = create_list();
@@ -16,13 +16,29 @@ Status should_add_at_end()
   return status;
 }
 
+Status should_add_at_end_in_non_empty_list()
+{
+  Status status = Success;
+  List_ptr list = create_list();
+  int a = 10;
+  add_to_list(list, &a);
+  int b = 20;
+  status = status && assert_status_equal(add_to_list(list, &b), Success);
+  status = status && assert_numbers_equal(list->length, 2);
+  status = status && assert_status_equal(*(int *)get_element(list, 1), b);
+  free(list);
+
+  return status;
+}
+
 void test_add_to_list()
 {
-  it("Should insert element at end", &should_add_at_end);
+  it("Should insert element at end in empty list", &should_add_at_end_in_empty_list);
+  it("Should insert element at end in non empty list", &should_add_at_end_in_non_empty_list);
   printf("\n");
 }
 
-Status should_add_at_start()
+Status should_add_at_start_in_empty_list()
 {
   Status status = Success;
   List_ptr list = create_list();
@@ -35,9 +51,25 @@ Status should_add_at_start()
   return status;
 }
 
+Status should_add_at_start_in_non_empty_list()
+{
+  Status status = Success;
+  List_ptr list = create_list();
+  int a = 10;
+  add_to_list(list, &a);
+  int b = 20;
+  status = status && assert_status_equal(add_to_start(list, &b), Success);
+  status = status && assert_numbers_equal(list->length, 2);
+  status = status && assert_status_equal(*(int *)get_element(list, 0), b);
+  free(list);
+
+  return status;
+}
+
 void test_add_to_start()
 {
-  it("Should insert element at start", &should_add_at_start);
+  it("Should insert element at start in empty list", &should_add_at_start_in_empty_list);
+  it("Should insert element at start in non empty list", &should_add_at_start_in_non_empty_list);
   printf("\n");
 }
 
